@@ -1,5 +1,5 @@
 defmodule ReportsFreelas do
-  alias ReportsFreelas.{MapMonth, Parser}
+  alias ReportsFreelas.Parser
 
   @users [
     "Daniele",
@@ -13,6 +13,21 @@ defmodule ReportsFreelas do
     "Rafael",
     "Vinicius"
   ]
+
+  @months_numbers %{
+    "1" => "janeiro",
+    "2" => "fevereiro",
+    "3" => "março",
+    "4" => "abril",
+    "5" => "maio",
+    "6" => "junho",
+    "7" => "julho",
+    "8" => "agosto",
+    "9" => "setembro",
+    "10" => "outubro",
+    "11" => "novembro",
+    "12" => "dezembro"
+  }
 
   @months %{
     "janeiro" => 0,
@@ -50,7 +65,7 @@ defmodule ReportsFreelas do
       "hours_per_years" => hours_per_years
     } = report
 
-    month = MapMonth.map_months(month)
+    month = Map.get(@months_numbers, month)
 
     all_hours = Map.put(all_hours, name, all_hours[name] + hours)
 
