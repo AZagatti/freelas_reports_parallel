@@ -179,4 +179,191 @@ defmodule ReportsFreelasTest do
       assert response == expected_response
     end
   end
+
+  describe "build_from_many/1" do
+    test "should get a complete report pass a list of reports" do
+      response = ReportsFreelas.build_from_many(["report_test.csv", "report_test.csv"])
+
+      expected_response =
+        {:ok,
+         %{
+           "all_hours" => %{
+             "Cleiton" => 24,
+             "Daniele" => 42,
+             "Danilo" => 14,
+             "Diego" => 24,
+             "Giuliano" => 28,
+             "Jakeliny" => 44,
+             "Joseph" => 26,
+             "Mayk" => 38,
+             "Rafael" => 14,
+             "Vinicius" => 0
+           },
+           "hours_per_month" => %{
+             "Cleiton" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 8,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 16,
+               "setembro" => 0
+             },
+             "Daniele" => %{
+               "abril" => 14,
+               "agosto" => 0,
+               "dezembro" => 10,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 2,
+               "maio" => 16,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Danilo" => %{
+               "abril" => 2,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 12,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Diego" => %{
+               "abril" => 8,
+               "agosto" => 8,
+               "dezembro" => 2,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 6
+             },
+             "Giuliano" => %{
+               "abril" => 2,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 18,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 8,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Jakeliny" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 16,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 28,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Joseph" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 4,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 6,
+               "novembro" => 10,
+               "outubro" => 0,
+               "setembro" => 6
+             },
+             "Mayk" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 10,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 14,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 14
+             },
+             "Rafael" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 14,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             },
+             "Vinicius" => %{
+               "abril" => 0,
+               "agosto" => 0,
+               "dezembro" => 0,
+               "fevereiro" => 0,
+               "janeiro" => 0,
+               "julho" => 0,
+               "junho" => 0,
+               "maio" => 0,
+               "março" => 0,
+               "novembro" => 0,
+               "outubro" => 0,
+               "setembro" => 0
+             }
+           },
+           "hours_per_years" => %{
+             "Cleiton" => %{"2016" => 6, "2017" => 0, "2018" => 0, "2019" => 0, "2020" => 18},
+             "Daniele" => %{"2016" => 20, "2017" => 6, "2018" => 14, "2019" => 0, "2020" => 2},
+             "Danilo" => %{"2016" => 0, "2017" => 0, "2018" => 2, "2019" => 12, "2020" => 0},
+             "Diego" => %{"2016" => 6, "2017" => 16, "2018" => 0, "2019" => 2, "2020" => 0},
+             "Giuliano" => %{"2016" => 0, "2017" => 6, "2018" => 0, "2019" => 12, "2020" => 10},
+             "Jakeliny" => %{"2016" => 16, "2017" => 16, "2018" => 0, "2019" => 12, "2020" => 0},
+             "Joseph" => %{"2016" => 0, "2017" => 6, "2018" => 0, "2019" => 6, "2020" => 14},
+             "Mayk" => %{"2016" => 14, "2017" => 16, "2018" => 0, "2019" => 8, "2020" => 0},
+             "Rafael" => %{"2016" => 0, "2017" => 14, "2018" => 0, "2019" => 0, "2020" => 0},
+             "Vinicius" => %{"2016" => 0, "2017" => 0, "2018" => 0, "2019" => 0, "2020" => 0}
+           }
+         }}
+
+      assert response == expected_response
+    end
+
+    test "should get an error when not pass a list" do
+      response = ReportsFreelas.build_from_many("banana")
+
+      expected_response = {:error, "Please provide a list of strings."}
+
+      assert response == expected_response
+    end
+  end
 end
